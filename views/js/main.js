@@ -422,7 +422,7 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
+  /*function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
@@ -446,16 +446,42 @@ var resizePizzas = function(size) {
     var dx = (newSize - oldSize) * windowWidth;
 
     return dx;
-  }
+  }*/
+  
+  function changePizzaSizes(size) {
+    var newWidth;
+    
+  	switch(size) {
+		  case "1":
+  		  newWidth = 25;
+  		  break;
+  		case "2":
+  		  newWidth = 33.3;
+  		  break;
+  		case "3":
+  		  newWidth = 50;
+  		  break;
+  		default:
+  		  console.log("bug in sizeSwitcher");
+	  }
 
+	var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+
+	for (var i = 0; i < randomPizzas.length; i++) {
+		randomPizzas[i].style.width = newWidth + "%";
+	}
+}
+
+  //NEED TO FIX THIS for LOOP
   // Iterates through pizza elements on the page and changes their widths
- function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+/* function changePizzaSizes(size) {
+    var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
+    for (var i = 0; i < randomPizzas.length; i++) {
+      var dx = determineDx(randomPizzas[i], size);
+      var newwidth = (randomPizzas[i].offsetWidth + dx) + 'px';
+      randomPizzas[i].style.width = newwidth;
     }
-  }
+  }*/
 
   changePizzaSizes(size);
 
@@ -502,7 +528,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-//pulled this var out so it won't need to be regenerated with each for loop
+//pulled the below var out so it won't need to be regenerated with each for loop
   var phase = Math.sin((document.body.scrollTop / 1250)); /*+ (i % 5));*/
   var items = document.querySelectorAll('.mover');
   //console.log("======================= New call to updatePositions =======================");
