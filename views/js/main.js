@@ -403,16 +403,17 @@ var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
+  //Changed the querySelectors to getElementById in this function
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -438,10 +439,12 @@ var resizePizzas = function(size) {
   		default:
   		  console.log("bug in sizeSwitcher");
 	  }
-
-	var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
-
-	for (var i = 0; i < randomPizzas.length; i++) {
+  
+  //Changed querySelector to getElementsByClassName in this var
+	var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+  
+  //Created len var so it's not run with each loop
+	for (var i = 0, len = randomPizzas.length; i < len; i++) {
 		randomPizzas[i].style.width = newWidth + "%";
 	}
 }
@@ -458,8 +461,9 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
-//pulled this var out of the loop so it's not called everytime the loop runs
+//Pulled this var out of the loop so it's not called everytime the loop runs
 var pizzasDiv = document.getElementById("randomPizzas");
+
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -496,8 +500,12 @@ function updatePositions() {
   //Pulled out vars from for loop here so they won't need to be regenerated with each for loop
   var top = document.body.scrollTop / 1250;
   var phase;
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
+  
+  //Changed querySelectorAll to getElementsByClassName
+  var items = document.getElementsByClassName('mover');
+  
+  //Saved items.length as a var so it's not run with each loop
+  for (var i = 0, len = items.length; i < len; i++) {
     phase = Math.sin(top + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
