@@ -519,8 +519,13 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  
+  //Pulled movingPizzas var out of for loop and replaced document.querySelector with getElementById API
+  var movingPizzas = document.getElementById('movingPizzas1');
+  
   //Pulled var elem out of for loop so it's not generated everytime loop runs
   var elem;
+  
   //Reduced number of background pizzas to 24
   for (var i = 0; i < 25; i++) {
     elem = document.createElement('img');
@@ -530,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
