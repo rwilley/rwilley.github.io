@@ -493,18 +493,11 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-//below var out so it won't need to be regenerated with each for loop
-  //var phase = Math.sin((document.body.scrollTop / 1250)); /*+ (i % 5));*/
+  //Pulled out vars from for loop here so they won't need to be regenerated with each for loop
   var top = document.body.scrollTop / 1250;
   var phase;
   var items = document.querySelectorAll('.mover');
-  //console.log("======================= New call to updatePositions =======================");
   for (var i = 0; i < items.length; i++) {
-    //console.log("----");
-    //console.log("i = " + i);
-    //console.log("i % 5 = " + (i % 5));
-    //console.log("document.body.scrollTop = " + document.body.scrollTop);
-    //console.log("phase = " + phase);
     phase = Math.sin(top + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
@@ -526,9 +519,11 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  //Pulled var elem out of for loop so it's not generated everytime loop runs
+  var elem;
   //Reduced number of background pizzas to 24
   for (var i = 0; i < 25; i++) {
-    var elem = document.createElement('img');
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
