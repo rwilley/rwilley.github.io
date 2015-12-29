@@ -493,8 +493,10 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-//pulled the below var out so it won't need to be regenerated with each for loop
+//below var out so it won't need to be regenerated with each for loop
   //var phase = Math.sin((document.body.scrollTop / 1250)); /*+ (i % 5));*/
+  var top = document.body.scrollTop / 1250;
+  var phase;
   var items = document.querySelectorAll('.mover');
   //console.log("======================= New call to updatePositions =======================");
   for (var i = 0; i < items.length; i++) {
@@ -503,8 +505,7 @@ function updatePositions() {
     //console.log("i % 5 = " + (i % 5));
     //console.log("document.body.scrollTop = " + document.body.scrollTop);
     //console.log("phase = " + phase);
-    var phase = Math.sin(top + i % 5);
-    var top = document.body.scrollTop / 1250;
+    phase = Math.sin(top + i % 5);
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
